@@ -1,0 +1,68 @@
+
+{
+  "panel": "SDP Line 14",
+  "company": "PT Roda Pasifik Mandiri",
+  "mapping_status": "preliminary",
+  "equipment": [
+    {
+      "id": "EQ001",
+      "name": "Lampu Penerangan",
+      "group": "R",
+      "supply_phases": null,
+      "quantity": null,
+      "rated_voltage_v": null,
+      "rated_power_kw": null,
+      "rated_current_a": null,
+      "rated_pf": null,
+      "verification_status": "pending"
+    },
+    {
+      "id": "EQ002",
+      "name": "Kipas",
+      "group": "R",
+      "supply_phases": null,
+      "quantity": null,
+      "rated_voltage_v": null,
+      "rated_power_kw": null,
+      "rated_current_a": null,
+      "rated_pf": null,
+      "verification_status": "pending"
+    },
+    {
+      "id": "EQ003",
+      "name": "Conveyor Panjang",
+      "group": "S",
+      "supply_phases": null,
+      "quantity": null,
+      "rated_voltage_v": 400,
+      "rated_power_kw": null,
+      "rated_current_a": null,
+      "rated_pf": null,
+      "verification_status": "pending"
+    },
+    {
+      "id": "EQ004",
+      "name": "Mesin Press",
+      "group": "T",
+      "supply_phases": null,
+      "quantity": null,
+      "rated_voltage_v": 400,
+      "rated_power_kw": null,
+      "rated_current_a": null,
+      "rated_pf": null,
+      "verification_status": "pending"
+    },
+    {
+      "id": "EQ005",
+      "name": "Panel Conveyor Gantung",
+      "group": "T",
+      "supply_phases": null,
+      "quantity": null,
+      "rated_voltage_v": null,
+      "rated_power_kw": null,
+      "rated_current_a": null,
+      "rated_pf": null,
+      "verification_status": "pending"
+    }
+  ]
+}
