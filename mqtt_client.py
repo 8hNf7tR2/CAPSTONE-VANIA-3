@@ -1,5 +1,6 @@
 import json
 import os
+import socket
 from pathlib import Path
 import requests
 import paho.mqtt.client as mqtt
@@ -146,7 +147,25 @@ client = mqtt.Client(
     client_id="SPM-Flask-Backend"
 )
 
+def on_connect_fail(client, userdata):
+    # Dipanggil tiap kali koneksi TCP ke broker gagal (lalu dicoba lagi otomatis).
+    # paho tidak memberi tahu penyebabnya, jadi dicek sendiri supaya muncul di log.
+    print("MQTT GAGAL TERSAMBUNG KE BROKER:", f"{MQTT_BROKER}:{MQTT_PORT}")
+
+    try:
+        socket.create_connection((MQTT_BROKER, MQTT_PORT), timeout=5).close()
+        print("  TCP ke broker OK, cek login / konfigurasi broker")
+    except OSError as error:
+        print("  Penyebab:", repr(error))
+
+
+def on_disconnect(client, userdata, disconnect_flags, reason_code, properties=None):
+    print("MQTT TERPUTUS:", reason_code, "(client akan mencoba tersambung lagi)")
+
+
 client.on_connect = on_connect
+client.on_connect_fail = on_connect_fail
+client.on_disconnect = on_disconnect
 client.on_message = on_message
 
 if MQTT_USERNAME:
@@ -158,6 +177,10 @@ if MQTT_USERNAME:
 # =========================================================
 
 print("Menghubungkan ke MQTT Broker...")
+print("Broker :", f"{MQTT_BROKER}:{MQTT_PORT}")
+print("Topic  :", MQTT_TOPIC)
+print("Login  :", "ada (username terisi)" if MQTT_USERNAME else "KOSONG (tanpa login)")
+print("Flask  :", FLASK_URL)
 
 # Di Railway, worker bisa start sebelum broker siap atau sebelum DNS jaringan
 # privat (*.railway.internal) bisa di-resolve. connect_async + retry_first_connection
