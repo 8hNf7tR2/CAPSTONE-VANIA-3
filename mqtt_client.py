@@ -44,6 +44,15 @@ FLASK_URL = (
 def on_connect(client, userdata, flags, reason_code, properties=None):
 
     print("====================================")
+
+    if reason_code.is_failure:
+        # Mis. "Not authorized" kalau username/password beda dengan broker
+        print("MQTT GAGAL TERHUBUNG")
+        print("Broker :", MQTT_BROKER)
+        print("Reason :", reason_code)
+        print("====================================")
+        return
+
     print("MQTT CONNECTED")
     print("Broker :", MQTT_BROKER)
     print("Topic  :", MQTT_TOPIC)
@@ -150,7 +159,12 @@ if MQTT_USERNAME:
 
 print("Menghubungkan ke MQTT Broker...")
 
-client.connect(
+# Di Railway, worker bisa start sebelum broker siap atau sebelum DNS jaringan
+# privat (*.railway.internal) bisa di-resolve. connect_async + retry_first_connection
+# membuat client mencoba lagi sendiri, bukan langsung crash.
+client.reconnect_delay_set(min_delay=1, max_delay=30)
+
+client.connect_async(
     MQTT_BROKER,
     MQTT_PORT,
     60
@@ -161,4 +175,4 @@ client.connect(
 # MQTT LOOP
 # =========================================================
 
-client.loop_forever()
+client.loop_forever(retry_first_connection=True)
