@@ -820,6 +820,14 @@ def classification():
         "classification.html"
     )
 
+# =========================================================
+# LOAD MAPPING PAGE
+# =========================================================
+
+@app.route("/load-mapping")
+def load_mapping():
+    return render_template("load_mapping.html")
+
 
 # =========================================================
 # RUN SERVER

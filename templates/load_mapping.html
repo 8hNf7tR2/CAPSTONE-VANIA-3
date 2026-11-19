@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load Mapping | Smart Power Monitoring</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/load_mapping.css') }}">
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="brand">
+            <h2>SMART POWER<br>MONITORING</h2>
+        </div>
+
+        <nav class="menu">
+            <a href="/" class="menu-item">Dashboard</a>
+            <a href="/#realtime" class="menu-item">
+                Realtime Monitoring
+            </a>
+            <a href="/#historical" class="menu-item">
+                Historical Data
+            </a>
+            <a href="/load-mapping" class="menu-item active">
+                Load Mapping
+            </a>
+
+            <div class="menu-section-title">
+                AI ANALYTICS
+            </div>
+
+            <a href="/anomaly" class="menu-item">
+                Anomaly Detection
+            </a>
+            <a href="/prediction" class="menu-item">
+                Load Prediction
+            </a>
+            <a href="/classification" class="menu-item">
+                Load Classification
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main">
+        <header class="header">
+            <div class="header-title">
+                <h1>LOAD MAPPING</h1>
+                <h2>SDP LINE 14 - GUDANG BARU</h2>
+                <p>PT Roda Pasifik Mandiri</p>
+            </div>
+        </header>
+
+        <div class="content">
+            <section class="mapping-intro card">
+                <h2>Equipment Inventory</h2>
+                <p>
+                    Inventarisasi kelompok beban listrik
+                    pada panel SDP Line 14 berdasarkan
+                    hasil pemetaan awal.
+                </p>
+                <p class="mapping-notice">
+                    Data spesifikasi belum diverifikasi.
+                    Pengukuran PZEM-004T V4 merupakan
+                    pengukuran agregat incoming tiap fasa.
+                </p>
+            </section>
+
+            <section class="mapping-grid">
+
+                <article class="mapping-card phase-r-border">
+                    <div class="mapping-heading">
+                        <h3>PHASE R</h3>
+                        <span>Penerangan & Ventilasi</span>
+                    </div>
+
+                    <div class="equipment-item">
+                        <strong>Lampu Penerangan</strong>
+                        <p>Daya nominal: Belum tersedia</p>
+                        <p>Tegangan nominal: Belum tersedia</p>
+                        <p>Jumlah: Belum tersedia</p>
+                    </div>
+
+                    <div class="equipment-item">
+                        <strong>Kipas</strong>
+                        <p>Daya nominal: Belum tersedia</p>
+                        <p>Tegangan nominal: Belum tersedia</p>
+                        <p>Jumlah: Belum tersedia</p>
+                    </div>
+                </article>
+
+                <article class="mapping-card phase-s-border">
+                    <div class="mapping-heading">
+                        <h3>PHASE S</h3>
+                        <span>Conveyor Panjang</span>
+                    </div>
+
+                    <div class="equipment-item">
+                        <strong>Conveyor Panjang</strong>
+                        <p>Tegangan awal: 380/400 V</p>
+                        <p>Daya nominal: Belum tersedia</p>
+                        <p>Arus nominal: Belum tersedia</p>
+                        <p>Jenis suplai: Perlu verifikasi</p>
+                    </div>
+                </article>
+
+                <article class="mapping-card phase-t-border">
+                    <div class="mapping-heading">
+                        <h3>PHASE T</h3>
+                        <span>Produksi & Conveyor Gantung</span>
+                    </div>
+
+                    <div class="equipment-item">
+                        <strong>Mesin Press</strong>
+                        <p>Tegangan awal: 380/400 V</p>
+                        <p>Daya nominal: Belum tersedia</p>
+                        <p>Arus nominal: Belum tersedia</p>
+                    </div>
+
+                    <div class="equipment-item">
+                        <strong>Panel Conveyor Gantung</strong>
+                        <p>Daya nominal: Belum tersedia</p>
+                        <p>Tegangan nominal: Belum tersedia</p>
+                        <p>Jumlah unit: Belum tersedia</p>
+                    </div>
+                </article>
+
+            </section>
+
+            <section class="card mapping-bottom">
+                <h3>Catatan Teknis</h3>
+                <p>
+                    Pengelompokan R, S, dan T merupakan
+                    informasi awal jalur distribusi.
+                    Peralatan tiga fasa dapat menggunakan
+                    ketiga penghantar sekaligus.
+                </p>
+                <p>
+                    Data nominal peralatan akan dilengkapi
+                    setelah survei nameplate dan
+                    verifikasi single-line diagram.
+                </p>
+            </section>
+        </div>
+    </main>
+</body>
+</html>
