@@ -23,6 +23,10 @@ function setText(id, value) {
 
 
 function formatNumber(value, decimals = 1) {
+    if (value === null || value === undefined || value === "") {
+        return "--";
+    }
+
     const number = Number(value);
 
     if (!Number.isFinite(number)) {
@@ -32,6 +36,19 @@ function formatNumber(value, decimals = 1) {
     return number.toFixed(decimals);
 }
 
+function formatPowerKW(value, decimals = 3) {
+    if (value === null || value === undefined || value === "") {
+        return "--";
+    }
+
+    const number = Number(value);
+
+    if (!Number.isFinite(number)) {
+        return "--";
+    }
+
+    return (number / 1000).toFixed(decimals);
+}
 
 function formatInterval(seconds) {
     const value = Number(seconds);
@@ -64,8 +81,9 @@ function updatePhases(data) {
     setText("voltage-r", formatNumber(data.voltage_r, 1));
     setText("current-r", formatNumber(data.current_r, 1));
     setText(
+
     "power-r",
-    formatNumber(Number(data.power_r || 0) / 1000, 3)
+    formatPowerKW(data.power_r, 3)
 );
     setText("pf-r", formatNumber(data.pf_r, 2));
 
@@ -74,18 +92,20 @@ function updatePhases(data) {
     setText("voltage-s", formatNumber(data.voltage_s, 1));
     setText("current-s", formatNumber(data.current_s, 1));
     setText(
+
     "power-s",
-    formatNumber(Number(data.power_s || 0) / 1000, 3))
-    setText("pf-s", formatNumber(data.pf_s, 2));
-
-
+   formatPowerKW(data.power_s, 3)
+    );
+    setText("pf-s", formatNumber(data.pf_s, 2)
+    );
+    
     // PHASE T
     setText("voltage-t", formatNumber(data.voltage_t, 1));
     setText("current-t", formatNumber(data.current_t, 1));
     setText(
     "power-t",
-    formatNumber(Number(data.power_t || 0) / 1000, 3)
-);
+    formatPowerKW(data.power_t, 3)
+    );
     setText("pf-t", formatNumber(data.pf_t, 2));
 }
 
@@ -102,13 +122,10 @@ function updateKPI(data) {
     // Dashboard menampilkan kW
     // =====================================================
 
-    const totalPowerKW =
-        Number(data.total_power || 0) / 1000;
-
     setText(
-        "total-power",
-        formatNumber(totalPowerKW, 3)
-    );
+    "total-power",
+    formatPowerKW(data.total_power, 3)
+);
 
 
     // =====================================================
@@ -194,26 +211,27 @@ function updateKPI(data) {
     // Jumlah energi tiga phase
     // =====================================================
 
-    const energyR =
-        Number(data.energy_r_kwh || 0);
+    const energyValues = [
+    data.energy_r_kwh,
+    data.energy_s_kwh,
+    data.energy_t_kwh
+]
+.filter(value => value !== null && value !== undefined && value !== "")
+.map(value => Number(value))
+.filter(value => Number.isFinite(value));
 
-    const energyS =
-        Number(data.energy_s_kwh || 0);
+const totalEnergy =
+    energyValues.length > 0
+        ? energyValues.reduce((a, b) => a + b, 0)
+        : null;
 
-    const energyT =
-        Number(data.energy_t_kwh || 0);
-
-
-    const totalEnergy =
-        energyR + energyS + energyT;
-
-
-    setText(
-        "energy-today",
-        formatNumber(totalEnergy, 3)
+setText(
+    "energy-today",
+    totalEnergy !== null
+        ? formatNumber(totalEnergy, 3)
+        : "--"
     );
 }
-
 
 // =========================================================
 // OPERATION STATUS
@@ -388,29 +406,52 @@ function updateEnergySummary(summary) {
         return;
     }
 
+    const energy = formatNumber(
+        summary.energy,
+        2
+    );
+
+    const power = formatNumber(
+        summary.active_power,
+        2
+    );
+
+    const pf = formatNumber(
+        summary.power_factor,
+        2
+    );
+
+    const frequency = formatNumber(
+        summary.frequency,
+        2
+    );
 
     setText(
         "summary-energy",
-        `${formatNumber(summary.energy, 2)} kWh`
+        energy === "--"
+            ? "--"
+            : `${energy} kWh`
     );
 
     setText(
         "summary-power",
-        `${formatNumber(summary.active_power, 2)} kW`
+        power === "--"
+            ? "--"
+            : `${power} kW`
     );
 
     setText(
         "summary-pf",
-        formatNumber(summary.power_factor, 2)
+        pf
     );
 
     setText(
         "summary-frequency",
-        `${formatNumber(summary.frequency, 2)} Hz`
+        frequency === "--"
+            ? "--"
+            : `${frequency} Hz`
     );
 }
-
-
 // =========================================================
 // SYSTEM EVENT LOG
 // =========================================================

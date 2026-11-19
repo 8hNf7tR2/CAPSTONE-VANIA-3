@@ -51,67 +51,45 @@ SHIFT_LABEL = "N/A"
 
 latest_data = {
 
-    "timestamp": "03 Sep 2026 14:32:16",
+    "timestamp": None,
 
-    # =========================
     # PHASE R
-    # =========================
+    "voltage_r": None,
+    "current_r": None,
+    "power_r": None,
+    "energy_r_kwh": None,
+    "energy_r_wh": None,
+    "frequency_r": None,
+    "pf_r": None,
+    "valid_r": False,
 
-    "voltage_r": 221.2,
-    "current_r": 12.3,
-    "power_r": 2740,
-
-    "energy_r_kwh": 125.4,
-    "energy_r_wh": 125400,
-
-    "frequency_r": 50.0,
-    "pf_r": 0.95,
-    "valid_r": True,
-
-    # =========================
     # PHASE S
-    # =========================
+    "voltage_s": None,
+    "current_s": None,
+    "power_s": None,
+    "energy_s_kwh": None,
+    "energy_s_wh": None,
+    "frequency_s": None,
+    "pf_s": None,
+    "valid_s": False,
 
-    "voltage_s": 220.8,
-    "current_s": 11.8,
-    "power_s": 2610,
-
-    "energy_s_kwh": 124.8,
-    "energy_s_wh": 124800,
-
-    "frequency_s": 50.0,
-    "pf_s": 0.94,
-    "valid_s": True,
-
-    # =========================
     # PHASE T
-    # =========================
+    "voltage_t": None,
+    "current_t": None,
+    "power_t": None,
+    "energy_t_kwh": None,
+    "energy_t_wh": None,
+    "frequency_t": None,
+    "pf_t": None,
+    "valid_t": False,
 
-    "voltage_t": 221.0,
-    "current_t": 12.0,
-    "power_t": 2650,
-
-    "energy_t_kwh": 125.1,
-    "energy_t_wh": 125100,
-
-    "frequency_t": 50.0,
-    "pf_t": 0.96,
-    "valid_t": True,
-
-    # =========================
     # TOTAL
-    # =========================
+    "total_power": None,
 
-    "total_power": 8000,
-
-    # =========================
-    # DERIVED / DASHBOARD
-    # (dihitung dari paket MQTT, lihat build_dashboard_fields)
-    # =========================
-
+    # DASHBOARD
     "sampling_interval": SAMPLING_INTERVAL,
     "last_packet": "--",
-    "load_state": "Idle",
+    "load_state": "--",
     "shift": SHIFT_LABEL,
     "system_status": "Waiting"
 }
@@ -214,43 +192,19 @@ last_google_sheet_send = 0
 # POWER HISTORY
 # =========================================================
 
-power_history = [
-    {"time": "14:17", "value": 45},
-    {"time": "14:20", "value": 52},
-    {"time": "14:23", "value": 58},
-    {"time": "14:26", "value": 55},
-    {"time": "14:29", "value": 63},
-    {"time": "14:32", "value": 48}
-]
-
+power_history = []
 
 # =========================================================
 # LOAD PROFILE
 # =========================================================
 
-load_profile = [
-    {"time": "00:00", "value": 12},
-    {"time": "04:00", "value": 17},
-    {"time": "08:00", "value": 45},
-    {"time": "12:00", "value": 82},
-    {"time": "16:00", "value": 78},
-    {"time": "20:00", "value": 43},
-    {"time": "24:00", "value": 18}
-]
-
+load_profile = []
 
 # =========================================================
 # SYSTEM EVENTS
 # =========================================================
 
-system_events = [
-    {
-        "time": "27 Okt 2026 14:22",
-        "message": "Over Current",
-        "severity": "Warning"
-    }
-]
-
+system_events = []
 
 # =========================================================
 # AI ANALYTICS STATUS
@@ -283,12 +237,10 @@ ai_status = {
 # =========================================================
 
 energy_summary = {
-
-    "energy": 125.48,
-    "active_power": 8.62,
-    "power_factor": 0.92,
-    "frequency": 49.98
-
+    "energy": None,
+    "active_power": None,
+    "power_factor": None,
+    "frequency": None
 }
 
 
